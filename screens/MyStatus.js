@@ -2,11 +2,19 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import ScreenTitle from '../components/ScreenTitle';
+import { Ionicons } from "@expo/vector-icons";
+
+const MyStatusIcon = props => (
+  <Ionicons
+    name={"md-camera"}
+    size={35}
+    color={props.focused ? "blue" : "grey"}
+  />
+);
 
 export default class MyStatus extends React.Component {
-
   static navigationOptions = {
-
+    tabBarIcon: MyStatusIcon
   };
 
   render() {
@@ -15,7 +23,7 @@ export default class MyStatus extends React.Component {
         <ScreenTitle name={"My status"} />
       </View>
     );
-  };
+  }
 };
 
 const styles = StyleSheet.create({

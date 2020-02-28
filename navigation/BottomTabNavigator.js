@@ -8,6 +8,11 @@ import MyStatus from "../screens/MyStatus";
 const BottomTabNavigator = createBottomTabNavigator({
   Home: Home,
   MyStatus: MyStatus
+},
+{
+  tabBarOptions: {
+    showLabel: false
+  }
 });
 
 export default BottomTabNavigator;
