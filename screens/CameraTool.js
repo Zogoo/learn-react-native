@@ -23,12 +23,7 @@ export default class CameraTool extends React.Component {
 
   state = {
     hasCameraPermission: null,
-    cameraType: Camera.Constants.Type.back,
-    flashMode: Camera.Constants.FlashMode.off
   };
-
-  setFlashMode = flashMode => this.setState({ flashMode });
-  setCameraType = cameraType => this.setState({ cameraType });
 
   async componentDidMount() {
     const camera = await Permissions.askAsync(
@@ -51,8 +46,8 @@ export default class CameraTool extends React.Component {
     return (
       <View>
         <Camera
-          type={cameraType}
-          flashMode={flashMode}
+          type={Camera.Constants.Type.back}
+          flashMode={Camera.Constants.FlashMode.off}
           style={styles.preview}
           ref={camera => (this.camera = camera)}
         />
