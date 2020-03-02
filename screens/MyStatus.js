@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const MyStatusIcon = props => (
   <Ionicons
-    name={"md-camera"}
+    name={"md-stats"}
     size={35}
     color={props.focused ? "blue" : "grey"}
   />
