@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import { Camera } from "expo-camera";
-import * as Permissions from 'expo-permissions';
+
 import { Ionicons } from '@expo/vector-icons';
+import * as Permissions from 'expo-permissions';
+import { BarCodeScanner } from "expo-barcode-scanner";
+
+import Client from '../util/Client';
 
 const { width: winWidth, height: winHeight } = Dimensions.get('window');
 
@@ -23,6 +26,7 @@ export default class CameraTool extends React.Component {
 
   state = {
     hasCameraPermission: null,
+    scanned: false
   };
 
   async componentDidMount() {
@@ -35,7 +39,7 @@ export default class CameraTool extends React.Component {
   }
 
   render() {
-    const { hasCameraPermission } = this.state;
+    const { hasCameraPermission, scanned } = this.state;
 
     if (hasCameraPermission == null) {
       return <View />;
@@ -45,14 +49,31 @@ export default class CameraTool extends React.Component {
 
     return (
       <View>
-        <Camera
-          type={Camera.Constants.Type.back}
-          flashMode={Camera.Constants.FlashMode.off}
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
           style={styles.preview}
-          ref={camera => (this.camera = camera)}
         />
       </View>
     );
+  };
+
+  handleBarCodeScanned = ({ type, data }) => {
+    this.setState({ scanned: true });
+    let jsonData = {};
+    if (this.isJson(data) && (jsonData = JSON.parse(data)).menu_id) {
+      Client.getMenu(jsonData.menu_id);
+    } else {
+      alert("This is not a valid QR code.");
+    }
+  };
+
+  isJson(str) {
+    try {
+      JSON.parse(str)
+    } catch(e) {
+      return false;
+    }
+    return true;
   }
 };
 
