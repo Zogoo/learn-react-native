@@ -60,7 +60,8 @@ export default class CameraTool extends React.Component {
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
     let jsonData = {};
-    if (this.isJson(data) && (jsonData = JSON.parse(data)).menu_id) {
+    if (this.isJson(data)) {
+      jsonData = JSON.parse(data)
       Client.getMenu(jsonData.menu_id);
     } else {
       alert("This is not a valid QR code.");
