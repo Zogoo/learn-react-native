@@ -96,8 +96,8 @@ const Client = {
   },
 
   restaurantPath(restaurantId) {
-    if (menuId == null) {
-      return "menus";
+    if (restaurantId == null) {
+      return `/m/menus`;
     } else {
       return `/m/${restaurantId}/users/menu`;
     }

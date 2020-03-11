@@ -92,10 +92,13 @@ export default class CameraTool extends React.Component {
 
   componentDidMount() {
     this.getPermission();
+    this.animatedLine();
   }
 
-  componentDidUpdate() {
-    this.animatedLine();
+  componentWillUnmount() {
+    this.setState({
+      focusLineAnimation: new Animated.Value(0)
+    });
   }
 
   render() {
@@ -146,7 +149,8 @@ export default class CameraTool extends React.Component {
                               inputRange: [0, 1],
                               outputRange: [
                                 0,
-                                this.state.animationLineHeight.height
+                                this.state.animationLineHeight
+                                  .height
                               ]
                             }
                           )
@@ -173,11 +177,10 @@ export default class CameraTool extends React.Component {
           <View style={styles.unfocusedContainer}></View>
         </View>
         {/* {scanned && (
-          <Button title={'Scan Again'} onPress={() => { this.setState({
-                                                            scanned: true
-                                                          }); }} />
-          )} */
-        }
+<Button title={'Scan Again'} onPress={() => { this.setState({
+                                            scanned: true
+                                          }); }} />
+)} */}
       </View>
     );
   }
