@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Blank Template",
-    "slug": "my-menu-react",
+    "name": "My menu mobile",
+    "slug": "my-menu-mobile",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -24,7 +24,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
-    }
-  }
+      "supportsTablet": true,
+      "bundleIdentifier": "com.code.mymenu",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.code.mymenu",
+      "versionCode": 1
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "Y",
+  "name": "MyMenu"
 }
