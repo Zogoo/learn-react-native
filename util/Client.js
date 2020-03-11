@@ -56,23 +56,25 @@ const Client = {
   },
 
   getAllMenu() {
-    return this.request(this.HTTP_GET, this.menuPath(null));
+    return this.request(this.HTTP_GET, this.restaurantPath(null));
   },
 
-  getMenu(Id) {
-    return this.request(this.HTTP_GET, this.menuPath(Id));
+  getMenu(restaurantId, menuId) {
+    return this.request(this.HTTP_GET, this.restaurantPath(restaurantId), {
+      menu_id: menuId
+    });
   },
 
   addNewMenu(data) {
-    return this.request(this.HTTP_PUT, this.menuPath(), data);
+    return this.request(this.HTTP_PUT, this.restaurantPath(), data);
   },
 
   updateMenu(menuId, data) {
-    return this.request(this.HTTP_PATCH, this.menuPath(menuId), data);
+    return this.request(this.HTTP_PATCH, this.restaurantPath(menuId), data);
   },
 
   deleteMenu(menuId) {
-    return this.request(this.HTTP_DELETE, this.menuPath(menuId));
+    return this.request(this.HTTP_DELETE, this.restaurantPath(menuId));
   },
 
   async request(method, path, data) {
@@ -93,11 +95,11 @@ const Client = {
     });
   },
 
-  menuPath(menuId = "") {
+  restaurantPath(restaurantId) {
     if (menuId == null) {
       return "menus";
     } else {
-      return `menu/${menuId}`;
+      return `/m/${restaurantId}/users/menu`;
     }
   }
 };
